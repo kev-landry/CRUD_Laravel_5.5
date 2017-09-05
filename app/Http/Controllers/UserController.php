@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-      $users = User::orderBy('id', 'DESC')->paginate(5);
+      $users = User::orderBy('id', 'DESC')->simplePaginate(5);
 
       return view('user.index', compact('users'));
     }
@@ -47,7 +47,7 @@ class UserController extends Controller
 
         User::create($request->all());
 
-        return redirect()->route('user.index')->with('succes', 'L\'utilisateur a bien été ajouté !');
+        return redirect()->route('user.index')->with('success', 'L\'utilisateur a bien été ajouté !');
     }
 
     /**
@@ -96,7 +96,7 @@ class UserController extends Controller
 
         User::find($id)->update($request->all());
 
-        return redirect()->route('user.index')->with('succes', 'L\'utilisateur a bien été édité !');
+        return redirect()->route('user.index')->with('success', 'L\'utilisateur a bien été édité !');
     }
 
     /**
@@ -109,6 +109,6 @@ class UserController extends Controller
     {
         User::find($id)->delete();
 
-        return redirect()->route('user.index')->with('succes', 'L\'utilisateur a bien été effacé !');
+        return redirect()->route('user.index')->with('success', 'L\'utilisateur a bien été effacé !');
     }
 }
