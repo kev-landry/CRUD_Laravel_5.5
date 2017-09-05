@@ -25,17 +25,17 @@
                <th>Email</th>
                <th>Mot de passe</th>
                <th>Statut</th>
+               <th colspan="3" style="text-align: center">Action</th>
               </thead>
               <tbody>
                   @if($users->count())
                   @foreach($users as $user)
                     <tr>
-                        <td><input type="checkbox" class="checkthis"/></td>
+                        <td><input type="checkbox" class=""/></td>
                         <td>{{ $user->user_name }}</td>
                         <td>{{ $user->user_email }}</td>
                         <td>{{ $user->user_password }}</td>
                         <td>{{ $user->user_statut }}</td>
-                        <td> <span class="label label-{{ ($user->status) ? 'success' : 'danger' }}"> {{ ($user->status) ? ' Actif ' : 'Inactif' }}</span></td>
                         <td><a class="btn btn-primary btn-xs" href="{{action('UserController@show', $user->id)}}" ><span class="glyphicon glyphicon-eye-open"></span></a></td>
                         <td><a class="btn btn-primary btn-xs" href="{{action('UserController@edit', $user->id)}}" ><span class="glyphicon glyphicon-pencil"></span></a></td>
                         <td>
