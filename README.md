@@ -7,3 +7,4 @@ Objectif :
 - Creer une pagination
 - Utiliser le système de seeding/migration
 - Créer une relation entre deux objects
+- Créer un système de recherche
