@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\User;
+use App\Departement;
 
 class User extends Authenticatable
 {
@@ -30,5 +32,21 @@ class User extends Authenticatable
     public function departement()
     {
         return $this->belongsTo('App\Departement');
+    }
+
+    public function scopeSearchKeyword($query, $keyword)
+    {
+
+        //$departement = Departement::pluck('departement_name');
+        if ($keyword!='') {
+            $query->where(function ($query) use ($keyword) {
+                $query->where("user_name", "LIKE","%$keyword%")
+                    ->orWhere("user_email", "LIKE", "%$keyword%")
+                    ->orWhereHas("departement", function($q) use ($keyword) {
+                        $q->where('departement_name', "LIKE", "%$keyword%");
+                });
+            });
+        }
+        return $query;
     }
 }

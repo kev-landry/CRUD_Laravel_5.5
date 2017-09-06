@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Departement;
+use Illuminate\Support\Facades\Input;
+
 
 class UserController extends Controller
 {
@@ -17,7 +19,11 @@ class UserController extends Controller
     {
       $users = User::orderBy('id', 'DESC')->simplePaginate(5);
 
-      return view('user.index', compact('users'));
+      $keyword = Input::get('keyword', '');
+
+      $users_found = User::SearchKeyword($keyword)->get();
+
+      return view('user.index', compact('users', 'keyword', 'users_found'));
     }
 
     /**
