@@ -28,29 +28,33 @@
                <th><input type="checkbox" id="checkall"/></th>
                <th>Utilsateur</th>
                <th>Email</th>
-               <th>Mot de passe</th>
+               <th>Département</th>
                <th>Statut</th>
                <th colspan="2" style="text-align: center">Action</th>
               </thead>
               <tbody>
                   @if($users->count())
-                  @foreach($users as $user)
-                    <tr>
-                        <td><input type="checkbox" class=""/></td>
-                        <td>{{ $user->user_name }}</td>
-                        <td>{{ $user->user_email }}</td>
-                        <td>{{ $user->user_password }}</td>
-                        <td>{{ $user->user_statut }}</td>
-                        <td><a class="btn btn-primary btn-xs" href="{{action('UserController@edit', $user->id)}}" ><span class="glyphicon glyphicon-pencil"></span></a></td>
-                        <td>
-                            <form class="" action="{{ action('UserController@destroy', $user->id)}}" method="post">
-                                {{csrf_field()}}
-                                <input name="_method" type="hidden" value="delete">
-                                <button class="btn btn-danger btn-xs" type="submit"><span class="glyphicon glyphicon-trash"></span></button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
+                      @foreach($users as $user)
+                        <tr>
+                            <td><input type="checkbox" class=""/></td>
+                            <td>{{ $user->user_name }}</td>
+                            <td>{{ $user->user_email }}</td>
+                            @if($user->departement)
+                                <td>{{ $user->departement->departement_name }}</td>
+                            @else
+                                <td>Aucun</td>
+                            @endif
+                            <td>{{ $user->user_statut }}</td>
+                            <td><a class="btn btn-primary btn-xs" href="{{action('UserController@edit', $user->id)}}" ><span class="glyphicon glyphicon-pencil"></span></a></td>
+                            <td>
+                                <form class="" action="{{ action('UserController@destroy', $user->id)}}" method="post">
+                                    {{csrf_field()}}
+                                    <input name="_method" type="hidden" value="delete">
+                                    <button class="btn btn-danger btn-xs" type="submit"><span class="glyphicon glyphicon-trash"></span></button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                 @else
                     <tr>
                         <td colspan="7">Aucun résultats trouvés !</td>

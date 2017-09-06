@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Departement;
 
 class UserController extends Controller
 {
@@ -26,7 +27,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        $departements_names = Departement::pluck('departement_name');
+        $departements = departement::get();
+
+        return view('user.create', compact('departements', 'departements_names'));
     }
 
     /**
@@ -37,15 +41,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $departement_name = $request->departement;
+        $departement_id = Departement::where('departement_name', $departement_name)->value('id');
         $this->validate($request, [
 
               'user_name' => 'required',
               'user_email' => 'required',
-              'user_password' => 'required',
-              'user_statut' => 'required',
+              'departement' => 'required',
+              //'user_statut' => 'required',
         ]);
-
-        User::create($request->all());
+        //dd($request->departement);
+        //User::create($request->all());
+        User::insert([
+            'user_name' => $request->user_name,
+            'user_email' => $request->user_email,
+            'departement_id' => $departement_id,
+        ]);
 
         return redirect()->route('user.index')->with('success', 'L\'utilisateur a bien été ajouté !');
     }

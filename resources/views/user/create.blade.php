@@ -44,26 +44,31 @@
                         <form method="POST" action="{{ route('user.store') }}"  role="form">
                         {{ csrf_field() }}
                         <div class="row">
-                            <div class="col-xs-3 col-sm-3 col-md-3">
+                            <div class="col-xs-4 col-sm-4 col-md-4">
                                 <div class="form-group">
                                     <input type="text" name="user_name" id="user_name" class="form-control input-sm" placeholder="Nom">
                                 </div>
                             </div>
-                            <div class="col-xs-3 col-sm-3 col-md-3">
+                            <div class="col-xs-4 col-sm-4 col-md-4">
                                 <div class="form-group">
                                     <input type="email" name="user_email" id="user_email" class="form-control input-sm" placeholder="email">
                                 </div>
                             </div>
-                            <div class="col-xs-3 col-sm-3 col-md-3">
-                                <div class="form-group">
-                                    <input type="password" name="user_password" id="user_password" class="form-control input-sm" placeholder="Mot de passe">
+                            <div class="col-xs-4 col-sm-4 col-md-4">
+                                <div class="form-group" style="">
+                                    <select name = "departement" class="selectpicker" style="">
+                                        <option selected >Département</option>
+                                        @foreach($departements_names as $departement_name)
+                                        <option value="{{ $departement_name }}">{{ $departement_name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-xs-3 col-sm-3 col-md-3">
+                            <!-- <div class="col-xs-3 col-sm-3 col-md-3">
                                 <div class="form-group">
                                     <input type="text" name="user_statut" id="user_statut" class="form-control input-sm" placeholder="Statut">
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                      <div class="row">
