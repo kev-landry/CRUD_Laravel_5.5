@@ -9,6 +9,8 @@ Objectif :
 - Créer une relation entre deux objects
 - Créer un système de recherche
 
+Afin que ce project fonctionne, régénérez une nouvelle key et renommez le .env.example en fonction de votre setup.
+
 <h3>Search</h3>
 
 <img src="https://tof.cx/images/2017/09/07/d24a7e2b282b812309c7c7d46595f258.png" alt="d24a7e2b282b812309c7c7d46595f258.png" border="0" />
